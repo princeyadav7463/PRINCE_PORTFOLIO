@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prince Yadav | Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <img src="profile.jpeg" alt="Profile" class="profile" />
+      <h1>Prince Yadav</h1>
+      <p>MCA Student | Software Developer Fresher</p>
+      <a href="resume.pdf" class="btn" download>Download Resume</a>
+    </header>
+
+    <section>
+      <h2>About Me</h2>
+      <p>
+        I am an MCA student and Computer Science graduate with a strong passion
+        for software and web development. I have built practical projects like
+        <strong>Big Bite (E-Commerce Website)</strong>,
+        <strong>Hospital Management System</strong>, and
+        <strong>Tourism Management System</strong> using
+        <strong>Python, HTML, CSS, JavaScript, and MySQL</strong>. I enjoy
+        solving real-world problems through technology and continuously learning
+        new skills. My goal is to start my career as a software developer,
+        contribute to meaningful projects, and grow as a skilled professional in
+        the IT industry.
+      </p>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <span>Python</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>MySQL</span>
+        <span>Tkinter</span>
+        <span>DBMS</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="card">
+          <h3>Hospital Management System</h3>
+          <p>
+            Built using Python, MySQL, HTML, CSS, and Tkinter. Features patient
+            registration, doctor login, and appointment booking.
+          </p>
+          <p>
+            <strong>Technologies:</strong> Python, MySQL, Tkinter, HTML, CSS
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Tourism Management System</h3>
+          <p>
+            Web-based project showing tourist places, wildlife, and festivals
+            using HTML, CSS, and Python.
+          </p>
+          <p><strong>Technologies:</strong> HTML, CSS, Python</p>
+        </div>
+        <div class="card">
+          <h3>Big Bite (E-Commerce Website)</h3>
+          <p>
+            Developed a fully functional e-commerce website using HTML, CSS, and
+            JavaScript. Features product listing, search functionality,
+            responsive design, and shopping cart.
+          </p>
+          <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <p><strong>MCA</strong> – DSPMU Ranchi</p>
+      <p><strong>B.Sc. Computer Science</strong> – DSPMU Ranchi</p>
+      <p><strong>Intermediate of Science</strong> – Balumath Latehar</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>Email: princeyadav875791@gmail.com</p>
+      <p>GitHub: github.com/princeyadav</p>
+      <p>LinkedIn: linkedin.com/in/princeyadav</p>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <ul class="certifications">
+        <li>
+          <a
+            href="https://www.hackerrank.com/certificates/fd9ae4a7f759"
+            target="_blank"
+          >
+            Java (Basic) Certification – HackerRank
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/learning/certificate/YOUR_PYTHON_LINK"
+            target="_blank"
+          >
+            Python Programming – LinkedIn
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.hackerrank.com/certificates/f61bf629f9c2"
+            target="_blank"
+          >
+            SQL Certification – HackerRank
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.mygreatlearning.com/certificate/OLOTMESH"
+            target="_blank"
+          >
+            C – Great Learning
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Contact Me</h2>
+
+      <!-- Contact Info -->
+      <p>
+        Email:
+        <a href="mailto:princeyadav875791@gmail.com"
+          >princeyadav875791@gmail.com</a
+        >
+      </p>
+      <p>
+        GitHub:
+        <a href="https://github.com/princeyadav7463" target="_blank"
+          >github.com/princeyadav</a
+        >
+      </p>
+      <p>
+        LinkedIn:
+        <a href="https://www.linkedin.com/in/princeyadav1843/" target="_blank"
+          >linkedin.com/in/princeyadav</a
+        >
+      </p>
+
+      <!-- Contact Form -->
+      <form id="contactForm">
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="message">Message:</label><br />
+        <textarea id="message" name="message" rows="5" required></textarea
+        ><br /><br />
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <p id="status"></p>
+    </section>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const status = document.getElementById("status"); // must exist in HTML
+          const formData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            message: e.target.message.value,
+          };
+
+          try {
+            const response = await fetch("/send-message", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            status.textContent = data.message;
+            status.style.color = data.success ? "green" : "red";
+            e.target.reset();
+          } catch (err) {
+            status.textContent = "Error sending message!";
+            status.style.color = "red";
+          }
+        });
+    </script>
+
+    <footer>
+      <p>© 2026 Prince Yadav</p>
+    </footer>
+  </body>
+</html>
